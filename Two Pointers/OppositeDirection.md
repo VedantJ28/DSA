@@ -7,19 +7,18 @@ This variation of the Two Pointers technique is useful when:
 3. **Finding closest pairs in a sorted array** (e.g., Smallest Difference Pair).
 4. **Maximizing or minimizing sums** (e.g., Optimal pair selection problems).
 
-## Approach  
-1. **Initialize two pointers**: One at the beginning (`left`) and one at the end (`right`) of the array or string.  
-2. **Move the pointers toward each other** based on conditions:  
-   - If the sum/product/condition is too **small**, move the `left` pointer forward.  
-   - If the sum/product/condition is too **large**, move the `right` pointer backward.  
-3. **Continue until they meet**: Once `left` meets `right`, stop processing.  
-4. **Return the result** based on the problem’s requirement.  
+## Problem 1: Two Sum in a Sorted Array
 
-## Examples
-
-### 1. Two Sum in a Sorted Array
 #### Problem:
 Given a sorted array, find if there exists a pair that sums up to a target.
+
+#### Approach:
+1. Initialize two pointers (`left` at the beginning and `right` at the end).
+2. Compute the sum at these pointers.
+3. If the sum equals the target, return true.
+4. If the sum is less than the target, increment `left`.
+5. If the sum is greater than the target, decrement `right`.
+6. Repeat until the pointers meet.
 
 #### Example Input:
 ```
@@ -41,9 +40,19 @@ bool twoSumSorted(vector<int>& arr, int target) {
 }
 ```
 
-### 2. Check if a String is a Palindrome
+---
+
+## Problem 2: Check if a String is a Palindrome
+
 #### Problem:
 Check if a given string is a palindrome (ignoring non-alphanumeric characters and case).
+
+#### Approach:
+1. Initialize two pointers (`left` at the start and `right` at the end).
+2. Skip non-alphanumeric characters using helper loops.
+3. Compare characters in a case-insensitive manner.
+4. If the characters differ, return false.
+5. Move pointers inward and repeat until they meet.
 
 #### Example Input:
 ```
@@ -65,9 +74,19 @@ bool isPalindrome(string s) {
 }
 ```
 
-### 3. Find the Closest Pair to Zero
+---
+
+## Problem 3: Find the Closest Pair to Zero
+
 #### Problem:
 Find the pair of numbers whose sum is closest to zero in a sorted array.
+
+#### Approach:
+1. Initialize two pointers at the start (`left`) and end (`right`).
+2. Calculate the sum and its absolute difference from zero.
+3. Track the pair with the minimum difference.
+4. If the sum is negative, increment `left`; if positive, decrement `right`.
+5. Continue until the pointers cross.
 
 #### Example Input:
 ```
@@ -93,9 +112,19 @@ pair<int, int> closestPairToZero(vector<int>& nums) {
 }
 ```
 
-### 4. Container With Most Water
+---
+
+## Problem 4: Container With Most Water
+
 #### Problem:
-Find two indices `i` and `j` such that the container formed between them holds the maximum water.
+Find two indices such that the container formed between them holds the maximum water.
+
+#### Approach:
+1. Set two pointers (`left` at the beginning and `right` at the end).
+2. Calculate the area using the shorter height and the distance between pointers.
+3. Track the maximum area obtained.
+4. Increment the pointer with the smaller height.
+5. Repeat until the pointers meet.
 
 #### Example Input:
 ```
@@ -117,9 +146,19 @@ int maxArea(vector<int>& height) {
 }
 ```
 
-### 5. Find Pairs with Difference K
+---
+
+## Problem 5: Find Pairs with Difference K
+
 #### Problem:
-Find the number of unique pairs `(i, j)` such that `arr[j] - arr[i] = k`.
+Find the number of unique pairs (i, j) such that arr[j] - arr[i] = k.
+
+#### Approach:
+1. Sort the array if not already sorted.
+2. Initialize two pointers; start the second pointer right after the first.
+3. Increase the second pointer if the difference is less than k.
+4. Increase the first pointer if the difference is greater than k.
+5. When the difference equals k, count the pair and move both pointers, skipping duplicates.
 
 #### Example Input:
 ```
@@ -146,14 +185,177 @@ int findPairs(vector<int>& nums, int k) {
 }
 ```
 
-## Summary
-| **Use Case** | **Example Problem** | **Complexity** |
-|-------------|-------------------|---------------|
-| **Find a pair with a sum** | Two Sum (Sorted Array) | \(O(N)\) |
-| **Check Palindrome** | Valid Palindrome | \(O(N)\) |
-| **Find closest pair to zero** | Smallest Sum Pair | \(O(N)\) |
-| **Max Water Storage** | Container With Most Water | \(O(N)\) |
-| **Find pairs with difference K** | Unique Pairs Difference | \(O(N \log N)\) |
+---
 
-This technique efficiently solves problems where we process data **from both ends towards the center** while optimizing **space and time complexity**. 🚀
+## Problem 6: Merging Two Sorted Arrays Without Extra Space
 
+#### Problem:
+Merge two sorted arrays arr1 and arr2 in-place without using extra space.
+
+#### Approach:
+1. Initialize pointers: one at the end of arr1 and one at the beginning of arr2.
+2. Compare elements at these pointers.
+3. Swap the elements if the element in arr1 is greater than the element in arr2.
+4. Adjust pointers respectively.
+5. Sort both arrays after the swapping process to finalize the merge.
+
+#### Example Input:
+```
+arr1 = [1, 4, 7, 8, 10]
+arr2 = [2, 3, 9]
+```
+
+#### Code Implementation:
+```cpp
+void mergeSortedArrays(vector<int>& arr1, vector<int>& arr2) {
+    int m = arr1.size(), n = arr2.size();
+    int left = m - 1, right = 0;
+    
+    while (left >= 0 && right < n) {
+        if (arr1[left] > arr2[right]) {
+            swap(arr1[left], arr2[right]);
+            left--;
+            right++;
+        } else {
+            break;
+        }
+    }
+    sort(arr1.begin(), arr1.end());
+    sort(arr2.begin(), arr2.end());
+}
+```
+
+---
+
+## Problem 7: Trapping Rain Water
+
+#### Problem:
+Given an array representing elevation heights, compute how much water can be trapped.
+
+#### Approach:
+1. Use two pointers to traverse the array from both ends.
+2. Maintain two variables (leftMax and rightMax) to track the maximum height encountered from each side.
+3. At each step, update the water volume by comparing the current height with the corresponding maximum.
+4. Adjust the left or right pointer based on which side is lower.
+5. Continue until the pointers meet.
+
+#### Example Input:
+```
+heights = [0,1,0,2,1,0,1,3,2,1,2,1]
+```
+
+#### Code Implementation:
+```cpp
+int trap(vector<int>& height) {
+    int left = 0, right = height.size() - 1, leftMax = 0, rightMax = 0, water = 0;
+    while (left < right) {
+        if (height[left] < height[right]) {
+            height[left] >= leftMax ? leftMax = height[left] : water += leftMax - height[left];
+            left++;
+        } else {
+            height[right] >= rightMax ? rightMax = height[right] : water += rightMax - height[right];
+            right--;
+        }
+    }
+    return water;
+}
+```
+
+---
+
+## Problem 8: Valid Mountain Array
+
+#### Problem:
+Determine if an array forms a valid mountain sequence.
+
+#### Approach:
+1. Initialize two pointers at both ends of the array.
+2. Move the left pointer while elements are strictly increasing.
+3. Move the right pointer while elements are strictly decreasing.
+4. Check that the pointers meet and that there is an increase and subsequent decrease.
+5. Return true only if conditions are met.
+
+#### Example Input:
+```
+arr = [0, 3, 2, 1]
+```
+
+#### Code Implementation:
+```cpp
+bool validMountainArray(vector<int>& arr) {
+    int left = 0, right = arr.size() - 1, n = arr.size();
+    while (left + 1 < n && arr[left] < arr[left + 1]) left++;
+    while (right > 0 && arr[right] < arr[right - 1]) right--;
+    return left > 0 && right < n - 1 && left == right;
+}
+```
+
+---
+
+## Problem 9: Maximize Sum of k Pairs with Smallest Difference
+
+#### Problem:
+Find k pairs with the smallest difference in a sorted array.
+
+#### Approach:
+1. Initialize two pointers at the start and end of the array.
+2. Pair the elements pointed by these two pointers.
+3. Record the pair and move both pointers inward.
+4. Repeat until k pairs are recorded or pointers cross.
+5. This method prioritizes pairs from both ends to minimize the difference.
+
+#### Example Input:
+```
+arr = [1, 3, 7, 8, 10]
+k = 2
+```
+
+#### Code Implementation:
+```cpp
+vector<pair<int, int>> minDifferencePairs(vector<int>& arr, int k) {
+    int left = 0, right = arr.size() - 1;
+    vector<pair<int, int>> result;
+    while (left < right && k > 0) {
+        result.push_back({arr[left], arr[right]});
+        left++;
+        right--;
+        k--;
+    }
+    return result;
+}
+```
+
+---
+
+## Problem 10: Find Maximum Index Difference (j - i)
+
+#### Problem:
+Find the maximum difference (j - i) such that arr[i] <= arr[j].
+
+#### Approach:
+1. Initialize two pointers at the extremes of the array.
+2. Check if the current pair satisfies arr[i] <= arr[j].
+3. If valid, calculate the difference and update the maximum difference.
+4. Depending on the result, adjust the left or right pointer.
+5. Continue until the pointers meet.
+
+#### Example Input:
+```
+arr = [3, 5, 4, 2]
+```
+
+#### Code Implementation:
+```cpp
+int maxIndexDifference(vector<int>& arr) {
+    int left = 0, right = arr.size() - 1, maxDiff = 0;
+    while (left < right) {
+        if (arr[left] <= arr[right]) {
+            maxDiff = max(maxDiff, right - left);
+            left++;
+        } else {
+            right--;
+        }
+    }
+    return maxDiff;
+}
+```
