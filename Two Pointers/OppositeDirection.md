@@ -7,10 +7,11 @@ This variation of the Two Pointers technique is useful when:
 3. **Finding closest pairs in a sorted array** (e.g., Smallest Difference Pair).
 4. **Maximizing or minimizing sums** (e.g., Optimal pair selection problems).
 
+---
 ## Problem 1: Two Sum in a Sorted Array
 
 #### Problem:
-Given a sorted array, find if there exists a pair that sums up to a target.
+Given a sorted array, determine if there exists a pair of elements that sum up to a given target value.
 
 #### Approach:
 1. Initialize two pointers (`left` at the beginning and `right` at the end).
@@ -32,13 +33,19 @@ bool twoSumSorted(vector<int>& arr, int target) {
     int left = 0, right = arr.size() - 1;
     while (left < right) {
         int sum = arr[left] + arr[right];
-        if (sum == target) return true;
-        else if (sum < target) left++;
-        else right--;
+        if (sum == target)
+            return true;
+        else if (sum < target)
+            left++;
+        else
+            right--;
     }
     return false;
 }
 ```
+
+⏳ **Time Complexity:** `O(n)`  
+- Each element is processed at most once as the pointers move inward.
 
 ---
 
@@ -74,7 +81,7 @@ bool isPalindrome(string s) {
 }
 ```
 
----
+⏳ **Time Complexity:** O(n)
 
 ## Problem 3: Find the Closest Pair to Zero
 
@@ -112,6 +119,9 @@ pair<int, int> closestPairToZero(vector<int>& nums) {
 }
 ```
 
+⏳ **Time Complexity:** O(n)  
+- Each element is processed at most once as the pointers move inward.
+
 ---
 
 ## Problem 4: Container With Most Water
@@ -146,12 +156,15 @@ int maxArea(vector<int>& height) {
 }
 ```
 
+⏳ **Time Complexity:** `O(n)`  
+- Each element is processed at most once as the pointers move inward.
+
 ---
 
 ## Problem 5: Find Pairs with Difference K
 
 #### Problem:
-Find the number of unique pairs (i, j) such that arr[j] - arr[i] = k.
+Find the number of unique pairs (i, j) such that `arr[j] - arr[i] = k`.
 
 #### Approach:
 1. Sort the array if not already sorted.
@@ -185,12 +198,15 @@ int findPairs(vector<int>& nums, int k) {
 }
 ```
 
+⏳ **Time Complexity:** `O(n log n)`  
+- Sorting takes `O(n log n)`, and the two-pointer traversal takes `O(n)`.
+
 ---
 
 ## Problem 6: Merging Two Sorted Arrays Without Extra Space
 
 #### Problem:
-Merge two sorted arrays arr1 and arr2 in-place without using extra space.
+Merge two sorted arrays `arr1` and `arr2` in-place without using extra space.
 
 #### Approach:
 1. Initialize pointers: one at the end of arr1 and one at the beginning of arr2.
@@ -224,6 +240,9 @@ void mergeSortedArrays(vector<int>& arr1, vector<int>& arr2) {
     sort(arr2.begin(), arr2.end());
 }
 ```
+
+⏳ **Time Complexity:** `O((m + n) log(m + n))`  
+- Sorting both arrays after swapping dominates the time complexity.
 
 ---
 
@@ -261,6 +280,9 @@ int trap(vector<int>& height) {
 }
 ```
 
+⏳ **Time Complexity:** `O(n)`  
+- Each element is processed at most once as the pointers move inward.
+
 ---
 
 ## Problem 8: Valid Mountain Array
@@ -290,12 +312,15 @@ bool validMountainArray(vector<int>& arr) {
 }
 ```
 
+⏳ **Time Complexity:** `O(n)`  
+- Each element is processed at most once as the pointers move inward.
+
 ---
 
 ## Problem 9: Maximize Sum of k Pairs with Smallest Difference
 
 #### Problem:
-Find k pairs with the smallest difference in a sorted array.
+Find `k` pairs with the smallest difference in a sorted array.
 
 #### Approach:
 1. Initialize two pointers at the start and end of the array.
@@ -325,12 +350,15 @@ vector<pair<int, int>> minDifferencePairs(vector<int>& arr, int k) {
 }
 ```
 
+⏳ **Time Complexity:** `O(k)`  
+- The loop runs at most `k` times.
+
 ---
 
 ## Problem 10: Find Maximum Index Difference (j - i)
 
 #### Problem:
-Find the maximum difference (j - i) such that arr[i] <= arr[j].
+Find the maximum difference `(j - i)` such that `arr[i] <= arr[j]`.
 
 #### Approach:
 1. Initialize two pointers at the extremes of the array.
@@ -359,3 +387,6 @@ int maxIndexDifference(vector<int>& arr) {
     return maxDiff;
 }
 ```
+
+⏳ **Time Complexity:** `O(n)`  
+- Each element is processed at most once as the pointers move inward.
